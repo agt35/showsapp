@@ -21,8 +21,11 @@ watch(page, async () => {
 <template>
     <div class="container">
         <div class="cards">
-            <Card v-for="char in characters" :image="char.imageUrl" :title="char.title" :name="char.fullName"
-                :key="char.id" />
+            <Card v-for="char in characters" :image="char.imageUrl" :name="char.fullName" :key="char.id">
+                <div>
+                    <h4>{{ char.title }}</h4>
+                </div>
+            </Card>
         </div>
         <div class="button-container">
             <button @click="page--" :disabled="page === 0">&lt</button>

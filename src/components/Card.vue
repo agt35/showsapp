@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps } from 'vue';
 
-const { name, image, title } = defineProps(['image', 'name', 'title'])
+const { name, image } = defineProps(['image', 'name'])
 </script>
 
 <template>
@@ -10,7 +10,7 @@ const { name, image, title } = defineProps(['image', 'name', 'title'])
             <img :src="image">
         </template>
         <h3>{{ name }}</h3>
-        <h4>{{ title }}</h4>
+        <slot></slot>
     </n-card>
 </template>
 

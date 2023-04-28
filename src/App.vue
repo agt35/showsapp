@@ -1,25 +1,19 @@
 <script setup>
-import GOTCards from './components/GOTCards.vue';
+import GOTCardsSuspense from './components/GOTCardsSuspense.vue';
 import RickMortyCards from './components/RickMortyCards.vue';
-
-
+import Hero from './components/Hero.vue';
+import { ref } from 'vue';
+const isGOT = ref(true);
 </script>
 
 <template>
   <main>
-    <h1>Hero</h1>
-    <Suspense>
-      <template #default>
-        <GOTCards />
-      </template>
-      <template #fallback>
-        <div>
-          <p>Loading...</p>
-        </div>
-      </template>
-    </Suspense>
-    <RickMortyCards />
+    <Hero :isGOT="isGOT" @selectShow="isGOT = !isGOT" />
+    <GOTCardsSuspense v-if="isGOT" />
+    <RickMortyCards v-else />
   </main>
 </template>
+
+<style scoped></style>
 
 

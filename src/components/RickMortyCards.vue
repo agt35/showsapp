@@ -1,20 +1,37 @@
 <script setup>
 import axios from 'axios';
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import Card from './Card.vue';
 
+const characters = ref(null);
+const page = ref(1);
 
+onMounted(async () => {
+    const response = await axios.get(`https://rickandmortyapi.com/api/character/?page=${page.value}`);
+    characters.value = response.data.results;
+    console.log(response)
+})
+
+watch(page, async () => {
+    const res = await axios.get(`https://rickandmortyapi.com/api/character/?page=${page.value}`);
+    characters.value = res.data.results;
+    console.log({ res })
+})
 </script>
 
 <template>
     <div class="container">
-        <div class="cards">
-            <!-- <Card v-for="char in characters" :image="char.imageUrl" :title="char.title" :name="char.fullName"
-                                                            :key="char.id" /> -->
+        <div v-if="characters" class="cards">
+            <Card v-for="char in characters" :image="char.image" :name="char.name" :key="char.id">
+                <p>{{ char.location.name }}</p>
+            </Card>
+        </div>
+        <div v-else class="cards">
+            <NSpin size="large" />
         </div>
         <div class="button-container">
-            <!-- <button @click="page--" :disabled="page === 0">&lt</button>
-                <button @click="page++">&gt</button> -->
+            <button @click="page--" :disabled="page === 0">&lt</button>
+            <button @click="page++">&gt</button>
         </div>
     </div>
 </template>
