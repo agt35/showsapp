@@ -1,5 +1,8 @@
 <script setup>
 import GOTCards from './components/GOTCards.vue';
+import RickMortyCards from './components/RickMortyCards.vue';
+
+
 </script>
 
 <template>
@@ -15,6 +18,7 @@ import GOTCards from './components/GOTCards.vue';
         </div>
       </template>
     </Suspense>
+    <RickMortyCards />
   </main>
 </template>
 
